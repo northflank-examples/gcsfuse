@@ -2,8 +2,10 @@
 
 mkdir -p /gcs
 
-gcsfuse --enable-hns=false --implicit-dirs --key-file /auth $GCS_FUSE_BUCKET /gcs
+echo "--- Mounting GCS ---"
+time gcsfuse --enable-hns=false --implicit-dirs --key-file /auth $GCS_FUSE_BUCKET /gcs
+echo "--- GCS Mounted ---"
 
-dd if=/dev/zero of=/gcs/file-write bs=512 count=2097152
+dd if=/dev/zero of=/gcs/file-write bs=512 count=2097152 status=progress
 
 sleep infinity
